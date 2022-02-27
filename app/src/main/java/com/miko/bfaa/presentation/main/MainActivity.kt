@@ -2,10 +2,10 @@ package com.miko.bfaa.presentation.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miko.bfaa.databinding.ActivityMainBinding
-import com.miko.bfaa.presentation.DetailUserActivity
 import com.miko.bfaa.presentation.main.adapter.UserAdapter
 import com.miko.bfaa.utils.DummyUsers
 
@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)

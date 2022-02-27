@@ -1,4 +1,4 @@
-package com.miko.bfaa.presentation
+package com.miko.bfaa.presentation.main
 
 import android.content.Context
 import android.content.Intent
