@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BFAA</string>
+    <string name="label_working_at_x">Working at %s</string>
+    <string name="label_follower_x">Follower\n</string>
+    <string name="label_repositories_x">Repositories\n</string>
+    <string name="label_following_x">Following\n</string>
+    <string name="title_detail_user">Detail User</string>
+</resources>
