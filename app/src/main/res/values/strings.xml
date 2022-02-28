@@ -5,4 +5,5 @@
     <string name="label_repositories_x">Repositories\n</string>
     <string name="label_following_x">Following\n</string>
     <string name="title_detail_user">Detail User</string>
+    <string name="desc_avatar_image">Avatar Image</string>
 </resources>

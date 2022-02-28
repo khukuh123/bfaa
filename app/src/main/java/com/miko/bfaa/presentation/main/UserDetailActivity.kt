@@ -8,30 +8,19 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import com.miko.bfaa.R
-import com.miko.bfaa.databinding.ActivityDetailBinding
+import com.miko.bfaa.databinding.ActivityUserDetailBinding
 import com.miko.bfaa.presentation.main.model.User
 import com.miko.bfaa.utils.formatShorter
 import com.miko.bfaa.utils.setImageFromString
 
-class DetailUserActivity : AppCompatActivity() {
+class UserDetailActivity : AppCompatActivity() {
 
-    companion object {
-        private const val EXTRA_USER = "user_extra"
-
-        @JvmStatic
-        fun start(context: Context, user: User) {
-            val starter = Intent(context, DetailUserActivity::class.java)
-                .putExtra(EXTRA_USER, user)
-            context.startActivity(starter)
-        }
-    }
-
-    private var binding: ActivityDetailBinding? = null
+    private var binding: ActivityUserDetailBinding? = null
     private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityUserDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         initIntent()
@@ -83,5 +72,16 @@ class DetailUserActivity : AppCompatActivity() {
         return SpannableStringBuilder().bold {
             append(this@setDetailUserSpannableText)
         }.append(value)
+    }
+
+    companion object {
+        private const val EXTRA_USER = "user_extra"
+
+        @JvmStatic
+        fun start(context: Context, user: User) {
+            val starter = Intent(context, UserDetailActivity::class.java)
+                .putExtra(EXTRA_USER, user)
+            context.startActivity(starter)
+        }
     }
 }

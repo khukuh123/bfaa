@@ -1,10 +1,13 @@
 package com.miko.bfaa.presentation.main
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.miko.bfaa.R
 import com.miko.bfaa.databinding.ActivityMainBinding
 import com.miko.bfaa.presentation.main.adapter.UserAdapter
 import com.miko.bfaa.utils.DummyUsers
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAction() {
         userAdapter.setOnItemClickedListener {
-            DetailUserActivity.start(this, it)
+            UserDetailActivity.start(this, it)
         }
     }
 
@@ -46,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         binding = null
-        userAdapter.destroy()
         super.onDestroy()
     }
 
@@ -55,7 +57,10 @@ class MainActivity : AppCompatActivity() {
             rvUser.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
                 adapter = userAdapter
-                addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+                val dividerItemDecoration = DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL).apply {
+                    setDrawable(ColorDrawable(ResourcesCompat.getColor(resources, R.color.red, null)))
+                }
+                addItemDecoration(dividerItemDecoration)
             }
         }
     }

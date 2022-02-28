@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BFAA">
         <activity
-            android:name=".presentation.main.DetailUserActivity"
+            android:name=".presentation.main.UserDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.main.MainActivity"

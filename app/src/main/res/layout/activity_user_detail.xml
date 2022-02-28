@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.main.DetailUserActivity">
+    tools:context=".presentation.main.UserDetailActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgAvatar"
@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_user1" />
+        tools:src="@drawable/ic_user1"
+        android:contentDescription="@string/desc_avatar_image"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvName"
