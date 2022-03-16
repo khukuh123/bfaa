@@ -1,16 +1,18 @@
 package com.miko.bfaa.presentation.main
 
-import android.graphics.drawable.ColorDrawable
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.widget.SearchView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miko.bfaa.R
 import com.miko.bfaa.databinding.ActivityMainBinding
 import com.miko.bfaa.presentation.main.adapter.UserAdapter
 import com.miko.bfaa.utils.DummyUsers
+import com.miko.bfaa.utils.showToast
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +49,31 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        binding?.apply {
+            val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+            val searchView = menu?.findItem(R.id.menu_search)?.actionView as SearchView
+
+            searchView.apply {
+                maxWidth = Int.MAX_VALUE
+                setSearchableInfo(searchManager.getSearchableInfo(componentName))
+                queryHint = getString(R.string.hint_user_search)
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        clearFocus()
+                        showToast(query.orEmpty())
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean =
+                        false
+                })
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onDestroy() {
         binding = null
         super.onDestroy()
@@ -57,10 +84,6 @@ class MainActivity : AppCompatActivity() {
             rvUser.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
                 adapter = userAdapter
-                val dividerItemDecoration = DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL).apply {
-                    setDrawable(ColorDrawable(ResourcesCompat.getColor(resources, R.color.red, null)))
-                }
-                addItemDecoration(dividerItemDecoration)
             }
         }
     }

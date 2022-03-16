@@ -6,4 +6,8 @@
     <string name="label_following_x">Following\n</string>
     <string name="title_detail_user">Detail User</string>
     <string name="desc_avatar_image">Avatar Image</string>
+    <string name="menu_search">Search</string>
+    <string name="hint_user_search">ex. Sidiq Permana</string>
+    <string name="title_follower">Follower</string>
+    <string name="title_following">Following</string>
 </resources>
