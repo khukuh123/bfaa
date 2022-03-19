@@ -7,7 +7,16 @@
     <string name="title_detail_user">Detail User</string>
     <string name="desc_avatar_image">Avatar Image</string>
     <string name="menu_search">Search</string>
-    <string name="hint_user_search">ex. Sidiq Permana</string>
+    <string name="hint_user_search">ex. sidiqpermana</string>
     <string name="title_follower">Follower</string>
     <string name="title_following">Following</string>
+    <string name="error_cannot_load_data">Tidak dapat memuat data</string>
+    <string name="label_seems_empty">Sepertinya kosong?</string>
+    <string name="desc_search_result_empty">Username mungkin salah. Coba gunakan kata kunci yang lain.</string>
+    <string name="menu_share">Share</string>
+    <string name="error_share_app_not_found">Aplikasi yang mendukung share tidak ditemukan. Mohon untuk menginstallnya.</string>
+    <string name="share_text_user">Hei, coba kamu cek pengguna Github ini.\n%s</string>
+    <string name="desc_follower_empty">Pengguna ini tidak memiliki pengikut sama sekali</string>
+    <string name="desc_following_empty">Pengguna ini belum mengikuti siapapun</string>
+    <string name="share_title_user">Bagikan pengguna ini menggunakan…</string>
 </resources>

@@ -19,6 +19,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "GITHUB_API_BASE_URL", "\"https://api.github.com/\""
+        buildConfigField "String", "GITHUB_API_KEY", "\"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\""
     }
 
     buildTypes {
@@ -40,14 +42,19 @@ dependencies {
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    //Gson
-    implementation 'com.google.code.gson:gson:2.9.0'
+    //Gson Converter
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    //Logging Interceptor
+    implementation('com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6')
+
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     //SplashScreen
     implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+    //MultiStateView
+    implementation 'com.github.Kennyc1012:MultiStateView:2.2.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'

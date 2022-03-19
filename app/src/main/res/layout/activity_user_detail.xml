@@ -1,162 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/motionLayout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    app:layoutDescription="@xml/detail_collapse_toolbar"
-    android:animateLayoutChanges="true"
-    tools:context=".presentation.main.UserDetailActivity">
+    android:orientation="vertical"
+    tools:context=".presentation.github.UserDetailActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:titleTextColor="?attr/colorOnPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/detailHeaderContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgAvatar"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:layout_marginTop="20dp"
-            android:contentDescription="@string/desc_avatar_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_user1" />
+    <com.kennyc.view.MultiStateView
+        android:id="@+id/msvUserDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:msv_errorView="@layout/layout_error"
+        app:msv_loadingView="@layout/layout_loading">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgAvatar"
-            tools:text="@tools:sample/full_names" />
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            app:layoutDescription="@xml/detail_collapse_toolbar">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@id/tvName"
-            app:layout_constraintStart_toStartOf="@id/tvName"
-            app:layout_constraintTop_toBottomOf="@id/tvName"
-            tools:text="JakeWharton" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detailHeaderContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvLocation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="2dp"
-            android:gravity="center_horizontal"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvUsername"
-            tools:text="@tools:sample/cities" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginTop="20dp"
+                    android:contentDescription="@string/desc_avatar_image"
+                    android:tint="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_baseline_account_circle_24" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvCompany"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/tvLocation"
-            app:layout_constraintStart_toStartOf="@id/tvLocation"
-            app:layout_constraintTop_toBottomOf="@id/tvLocation"
-            tools:text="Working at Github" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgAvatar"
+                    tools:text="@tools:sample/full_names" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvRepositories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvFollower"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCompany"
-            tools:text="Repositories\n108" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="4dp"
+                    android:drawablePadding="8dp"
+                    android:textSize="16sp"
+                    app:drawableStartCompat="@drawable/ic_baseline_alternate_email_24"
+                    app:drawableTint="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvName"
+                    tools:text="JakeWharton" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvFollower"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="4dp"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/tvRepositories"
-            app:layout_constraintEnd_toStartOf="@id/tvFollowing"
-            app:layout_constraintStart_toEndOf="@id/tvRepositories"
-            app:layout_constraintTop_toTopOf="@id/tvRepositories"
-            tools:text="Follower\n108" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="2dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+                    app:drawableTint="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvUsername"
+                    tools:text="@tools:sample/cities" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvFollowing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/tvFollower"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvFollower"
-            app:layout_constraintTop_toTopOf="@id/tvFollower"
-            tools:text="Following\n108" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvCompany"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    app:drawableStartCompat="@drawable/ic_baseline_home_work_24"
+                    app:drawableTint="?attr/colorPrimaryVariant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLocation"
+                    tools:text="Working at Github" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvRepositories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvFollower"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCompany"
+                    tools:text="Repositories\n108" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/detailContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailHeaderContainer"
-        app:layout_constraintBottom_toBottomOf="parent">
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvFollower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvRepositories"
+                    app:layout_constraintEnd_toStartOf="@id/tvFollowing"
+                    app:layout_constraintStart_toEndOf="@id/tvRepositories"
+                    app:layout_constraintTop_toTopOf="@id/tvRepositories"
+                    tools:text="Follower\n108" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabUserDetail"
-            android:layout_width="0dp"
-            android:clipToPadding="false"
-            android:layout_height="@dimen/tab_height"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvFollowing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center_horizontal"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvFollower"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvFollower"
+                    app:layout_constraintTop_toTopOf="@id/tvFollower"
+                    tools:text="Following\n108" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vpUserDetail"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabUserDetail"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabUserDetail"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/tab_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detailHeaderContainer" />
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vpUserDetail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tabUserDetail" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </com.kennyc.view.MultiStateView>
+
+</LinearLayout>

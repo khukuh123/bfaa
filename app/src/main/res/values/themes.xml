@@ -21,7 +21,7 @@
     <style name="BFAATextView" parent="android:Widget.TextView">
         <item name="android:textColor">@color/grey</item>
     </style>
-    
+
     <style name="Theme.BFAA.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/bluePastel</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
@@ -47,16 +47,16 @@
     <style name="Widget.BFAA.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabTextAppearance">@style/TextAppearance.BFAA.TabLayout</item>
         <item name="tabIndicator">@drawable/bg_tab_indicator</item>
-        <item name="tabIndicatorGravity">stretch</item>
+        <item name="tabIndicatorGravity">bottom</item>
         <item name="tabPaddingStart">16dp</item>
         <item name="tabPaddingEnd">16dp</item>
-        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimaryVariant</item>
         <item name="tabGravity">center</item>
     </style>
-    
+
     <style name="TextAppearance.BFAA.TabLayout" parent="TextAppearance.AppCompat.Button">
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:letterSpacing">0.06</item>
+        <item name="android:letterSpacing">0.04</item>
     </style>
 </resources>
