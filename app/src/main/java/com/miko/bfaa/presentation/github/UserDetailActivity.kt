@@ -8,36 +8,40 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayoutMediator
 import com.miko.bfaa.R
-import com.miko.bfaa.base.BFAAPagerAdapter
-import com.miko.bfaa.base.BFAAViewModelFactory
-import com.miko.bfaa.data.github.GithubApi
+import com.miko.bfaa.base.BasePagerAdapter
 import com.miko.bfaa.databinding.ActivityUserDetailBinding
 import com.miko.bfaa.presentation.github.model.User
+import com.miko.bfaa.presentation.github.viewmodel.FavoriteViewModel
+import com.miko.bfaa.presentation.github.viewmodel.UserViewModel
 import com.miko.bfaa.utils.*
 
 
 class UserDetailActivity : AppCompatActivity() {
 
-    private val pagerAdapter: BFAAPagerAdapter by lazy {
-        BFAAPagerAdapter(
+    private val pagerAdapter: BasePagerAdapter by lazy {
+        BasePagerAdapter(
             this, getTabFragmentList(), mutableListOf(
                 getString(R.string.title_follower),
                 getString(R.string.title_following)
             )
         )
     }
-    private val githubViewModel: GithubViewModel by lazy {
-        ViewModelProvider(this, BFAAViewModelFactory(GithubApi.getGithubApi()))[GithubViewModel::class.java]
+    private val userViewModel: UserViewModel by lazy {
+        ServiceLocator.getUserViewModel(this, dataStore)
+    }
+    private val favoriteViewModel: FavoriteViewModel by lazy {
+        ServiceLocator.getFavoriteViewModel(this, dataStore)
     }
 
     private var binding: ActivityUserDetailBinding? = null
     private lateinit var username: String
-    private lateinit var name: String
+    private var user: User? = null
+    private var favoriteMenu: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +74,7 @@ class UserDetailActivity : AppCompatActivity() {
 
                 override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                     when (currentId) {
-                        R.id.collapsed -> toolbar.title = name
+                        R.id.collapsed -> toolbar.title = user?.name.orEmpty()
                         else -> toolbar.title = getString(R.string.title_detail_user)
                     }
                 }
@@ -82,12 +86,19 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     private fun initProcess() {
-        githubViewModel.getUserDetail(username)
+        userViewModel.getUserDetail(username)
     }
 
     private fun initObservers() {
         binding?.apply {
-            githubViewModel.userDetail.observe(this@UserDetailActivity,
+            favoriteViewModel.isFavoriteUser.observe(this@UserDetailActivity) {
+                favoriteMenu?.apply {
+                    isChecked = it.isNotEmpty()
+                    setFavoriteMenuState()
+                }
+                user?.isFavorite = it.isNotEmpty()
+            }
+            userViewModel.userDetail.observe(this@UserDetailActivity,
                 onLoading = {
                     msvUserDetail.showLoading()
                 },
@@ -104,12 +115,21 @@ class UserDetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.user_detail_menu, menu)
+        favoriteMenu = menu?.findItem(R.id.menu_favorite)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> onBackPressed()
+            R.id.menu_favorite -> {
+                user?.let {
+                    it.isFavorite = !it.isFavorite
+                    item.isChecked = !it.isFavorite
+                    item.setFavoriteMenuState()
+                    favoriteViewModel.setFavoriteUser(it)
+                }
+            }
             R.id.menu_share -> {
                 val profileUrl = "${AppConst.GITHUB_URL_BASE}$username"
                 share(getString(R.string.share_text_user).format(profileUrl))
@@ -123,12 +143,19 @@ class UserDetailActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    private fun MenuItem.setFavoriteMenuState() {
+        this.icon = ContextCompat.getDrawable(
+            this@UserDetailActivity,
+            if (this.isChecked) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24)
+
+    }
+
     private fun setupUserDetail(user: User) {
+        favoriteViewModel.getFavoriteUserById(user.id)
+        this.user = user
         binding?.apply {
             imgAvatar.setImageFromUrl(user.avatar)
-            tvName.text = user.name.replaceWithDashIfEmpty().also {
-                name = it
-            }
+            tvName.text = user.name.replaceWithDashIfEmpty()
             tvUsername.text = user.username.replaceWithDashIfEmpty()
             tvLocation.text = user.location.replaceWithDashIfEmpty()
             tvCompany.text = getString(R.string.label_working_at_x).format(user.company.replaceWithDashIfEmpty())

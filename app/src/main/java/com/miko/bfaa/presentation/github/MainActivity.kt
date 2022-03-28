@@ -6,15 +6,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.miko.bfaa.R
-import com.miko.bfaa.base.BFAAViewModelFactory
-import com.miko.bfaa.data.github.GithubApi
 import com.miko.bfaa.databinding.ActivityMainBinding
 import com.miko.bfaa.presentation.github.adapter.UserAdapter
+import com.miko.bfaa.presentation.github.viewmodel.SettingsViewModel
+import com.miko.bfaa.presentation.github.viewmodel.UserViewModel
 import com.miko.bfaa.utils.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +23,11 @@ class MainActivity : AppCompatActivity() {
     private val userAdapter: UserAdapter by lazy {
         UserAdapter()
     }
-    private val githubViewModel: GithubViewModel by lazy {
-        ViewModelProvider(this, BFAAViewModelFactory(GithubApi.getGithubApi()))[GithubViewModel::class.java]
+    private val userViewModel: UserViewModel by lazy {
+        ServiceLocator.getUserViewModel(this, dataStore)
+    }
+    private val settingsViewModel: SettingsViewModel by lazy {
+        ServiceLocator.getSettingsViewModel(this, dataStore)
     }
 
     private var binding: ActivityMainBinding? = null
@@ -50,15 +54,19 @@ class MainActivity : AppCompatActivity() {
         userAdapter.setOnItemClickedListener {
             UserDetailActivity.start(this, it.username)
         }
+        binding?.fabFavorite?.setOnClickListener {
+            FavoriteActivity.start(this)
+        }
     }
 
     private fun initProcess() {
-        githubViewModel.searchUser("")
+        userViewModel.searchUser("")
+        settingsViewModel.getDarkModeTheme()
     }
 
     private fun initObservers() {
         binding?.apply {
-            githubViewModel.userList.observe(this@MainActivity,
+            userViewModel.userList.observe(this@MainActivity,
                 onLoading = {
                     msvMain.showLoading()
                 },
@@ -67,13 +75,20 @@ class MainActivity : AppCompatActivity() {
                         msvMain.showEmptyList(message = getString(R.string.desc_search_result_empty))
                     } else {
                         msvMain.showContent()
-                        userAdapter.updateItems(items)
+                        userAdapter.submitList(items)
                     }
                 },
                 onError = { errorMessage ->
                     msvMain.showError(message = errorMessage)
                 }
             )
+            settingsViewModel.darkModeTheme.observe(this@MainActivity) { isDarkModeActive ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
         }
     }
 
@@ -87,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                         true
 
                     override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
-                        githubViewModel.searchUser("")
+                        userViewModel.searchUser("")
                         return true
                     }
                 })
@@ -100,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         clearFocus()
-                        githubViewModel.searchUser(query.orEmpty())
+                        userViewModel.searchUser(query.orEmpty())
                         return true
                     }
 
@@ -110,6 +125,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_settings -> SettingsActivity.start(this)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
@@ -122,6 +144,12 @@ class MainActivity : AppCompatActivity() {
             rvUser.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
                 adapter = userAdapter
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) fabFavorite.show() else fabFavorite.hide()
+                        super.onScrollStateChanged(recyclerView, newState)
+                    }
+                })
             }
         }
     }

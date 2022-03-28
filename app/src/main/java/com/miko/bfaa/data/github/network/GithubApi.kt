@@ -1,4 +1,4 @@
-package com.miko.bfaa.data.github
+package com.miko.bfaa.data.github.network
 
 import com.miko.bfaa.BuildConfig
 import com.miko.bfaa.utils.AppConst

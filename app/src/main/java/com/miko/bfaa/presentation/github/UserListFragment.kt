@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.miko.bfaa.R
-import com.miko.bfaa.base.BFAAViewModelFactory
-import com.miko.bfaa.data.github.GithubApi
 import com.miko.bfaa.databinding.FragmentUserListBinding
 import com.miko.bfaa.presentation.github.adapter.UserSimplifiedAdapter
+import com.miko.bfaa.presentation.github.viewmodel.UserViewModel
 import com.miko.bfaa.utils.*
 
 class UserListFragment : Fragment() {
@@ -19,8 +18,8 @@ class UserListFragment : Fragment() {
     private val userSimplifiedAdapter: UserSimplifiedAdapter by lazy {
         UserSimplifiedAdapter()
     }
-    private val githubViewModel: GithubViewModel by lazy {
-        ViewModelProvider(this, BFAAViewModelFactory(GithubApi.getGithubApi()))[GithubViewModel::class.java]
+    private val userViewModel: UserViewModel by lazy {
+        ServiceLocator.getUserViewModel(requireActivity() as AppCompatActivity, requireContext().dataStore)
     }
 
     private var binding: FragmentUserListBinding? = null
@@ -42,6 +41,11 @@ class UserListFragment : Fragment() {
         initObserver()
     }
 
+    override fun onDestroyView() {
+        binding = null
+        super.onDestroyView()
+    }
+
     private fun initIntent() {
         isFollower = arguments?.getBoolean(BundleKeys.IS_FOLLOWER) ?: false
         username = arguments?.getString(BundleKeys.USERNAME).orEmpty()
@@ -59,16 +63,16 @@ class UserListFragment : Fragment() {
 
     private fun initProcess() {
         if (isFollower) {
-            githubViewModel.getUserFollowerList(username)
+            userViewModel.getUserFollowerList(username)
         } else {
-            githubViewModel.getUserFollowingList(username)
+            userViewModel.getUserFollowingList(username)
         }
     }
 
     private fun initObserver() {
         binding?.apply {
             if (isFollower) {
-                githubViewModel.userFollowers.observe(viewLifecycleOwner,
+                userViewModel.userFollowers.observe(viewLifecycleOwner,
                     onLoading = {
                         msvUserList.showLoading()
                     },
@@ -77,7 +81,7 @@ class UserListFragment : Fragment() {
                             msvUserList.showEmptyList(message = getString(R.string.desc_follower_empty))
                         } else {
                             msvUserList.showContent()
-                            userSimplifiedAdapter.updateItems(it)
+                            userSimplifiedAdapter.submitList(it)
                         }
                     },
                     onError = { errorMessage ->
@@ -85,7 +89,7 @@ class UserListFragment : Fragment() {
                     }
                 )
             } else {
-                githubViewModel.userFollowings.observe(viewLifecycleOwner,
+                userViewModel.userFollowings.observe(viewLifecycleOwner,
                     onLoading = {
                         msvUserList.showLoading()
                     },
@@ -94,7 +98,7 @@ class UserListFragment : Fragment() {
                             msvUserList.showEmptyList(message = getString(R.string.desc_following_empty))
                         } else {
                             msvUserList.showContent()
-                            userSimplifiedAdapter.updateItems(it)
+                            userSimplifiedAdapter.submitList(it)
                         }
                     },
                     onError = { errorMessage ->

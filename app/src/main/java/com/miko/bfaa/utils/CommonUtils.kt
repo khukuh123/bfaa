@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ShareCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.bumptech.glide.Glide
@@ -58,7 +61,7 @@ fun <T> LiveData<Resource<T>>.observe(
     lifecycleOwner: LifecycleOwner,
     onLoading: () -> Unit,
     onSuccess: (items: T) -> Unit,
-    onError: (errorMessage: String) -> Unit
+    onError: (errorMessage: String) -> Unit,
 ) {
     observe(lifecycleOwner) {
         when (it) {
@@ -84,3 +87,5 @@ fun Context.share(shareText: String) {
         this.showToast(getString(R.string.error_share_app_not_found))
     }
 }
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PreferenceUtil.PREFERENCES_NAME)

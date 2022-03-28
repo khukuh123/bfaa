@@ -1,9 +1,10 @@
 package com.miko.bfaa.utils
 
-import com.miko.bfaa.data.github.response.FollowerItem
-import com.miko.bfaa.data.github.response.FollowingItem
-import com.miko.bfaa.data.github.response.UserDetailResponse
-import com.miko.bfaa.data.github.response.UserItem
+import com.miko.bfaa.data.github.local.entity.FavoriteUserEntity
+import com.miko.bfaa.data.github.network.response.FollowerItem
+import com.miko.bfaa.data.github.network.response.FollowingItem
+import com.miko.bfaa.data.github.network.response.UserDetailResponse
+import com.miko.bfaa.data.github.network.response.UserItem
 import com.miko.bfaa.presentation.github.model.User
 
 fun UserDetailResponse.toUser() =
@@ -16,7 +17,8 @@ fun UserDetailResponse.toUser() =
         this.location ?: "",
         this.name ?: "",
         this.publicRepos ?: 0,
-        this.login ?: ""
+        this.login ?: "",
+        false
     )
 
 fun UserItem.toUser() =
@@ -29,7 +31,8 @@ fun UserItem.toUser() =
         "",
         "",
         0,
-        this.login ?: ""
+        this.login ?: "",
+        false
     )
 
 fun FollowingItem.toUser() =
@@ -42,7 +45,8 @@ fun FollowingItem.toUser() =
         "",
         "",
         0,
-        this.login ?: ""
+        this.login ?: "",
+        false
     )
 
 fun FollowerItem.toUser() =
@@ -55,5 +59,29 @@ fun FollowerItem.toUser() =
         "",
         "",
         0,
-        this.login ?: ""
+        this.login ?: "",
+        false
+    )
+
+fun FavoriteUserEntity.toUser() =
+    User(
+        this.id,
+        this.avatarUrl,
+        "",
+        0,
+        0,
+        this.location,
+        this.name,
+        0,
+        this.username,
+        false
+    )
+
+fun fromUser(user: User): FavoriteUserEntity =
+    FavoriteUserEntity(
+        user.id,
+        user.avatar,
+        user.name,
+        user.username,
+        user.location
     )

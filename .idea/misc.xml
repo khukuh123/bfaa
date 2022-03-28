@@ -7,23 +7,29 @@
         <entry key="..\:/Users/Acer/.gradle/caches/transforms-3/ef532b6d1ae35b007ac277b7869ad55e/transformed/material-1.5.0/res/drawable/m3_tabs_rounded_line_indicator.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Acer/.gradle/caches/transforms-3/ef532b6d1ae35b007ac277b7869ad55e/transformed/material-1.5.0/res/drawable/mtrl_tabs_default_indicator.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/drawable/bg_tab_indicator.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.188" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/drawable/ic_baseline_alternate_email_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/drawable/ic_baseline_home_work_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/drawable/selector_favorite.xml" value="0.178" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/activity_detail.xml" value="0.22" />
-        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/activity_favorite.xml" value="0.1796875" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/activity_settings.xml" value="0.1796875" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/activity_splash_screen.xml" value="0.1796875" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/activity_user_detail.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/fragment_user_list.xml" value="0.1984375" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/item_favorite.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/item_user.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/item_user_simplified.xml" value="0.22" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/layout_empty.xml" value="0.1796875" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/layout_error.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/layout/layout_loading.xml" value="0.5" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/menu/main_menu.xml" value="0.1796875" />
-        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/menu/user_detail_menu.xml" value="0.1796875" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/menu/user_detail_menu.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/xml/detail_collapse_toolbar.xml" value="0.1796875" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/BFAA/app/src/main/res/xml/preferences.xml" value="0.1796875" />
       </map>
     </option>
   </component>

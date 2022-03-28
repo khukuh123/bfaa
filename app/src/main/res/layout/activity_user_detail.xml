@@ -64,6 +64,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvUsername"
+                    style="@style/UserDetailIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
@@ -71,7 +72,6 @@
                     android:drawablePadding="8dp"
                     android:textSize="16sp"
                     app:drawableStartCompat="@drawable/ic_baseline_alternate_email_24"
-                    app:drawableTint="?attr/colorPrimaryVariant"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +80,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvLocation"
+                    style="@style/UserDetailIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
@@ -88,7 +89,6 @@
                     android:gravity="center"
                     android:textSize="14sp"
                     app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
-                    app:drawableTint="?attr/colorPrimaryVariant"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +97,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvCompany"
+                    style="@style/UserDetailIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
@@ -104,7 +105,6 @@
                     android:gravity="center"
                     android:textSize="14sp"
                     app:drawableStartCompat="@drawable/ic_baseline_home_work_24"
-                    app:drawableTint="?attr/colorPrimaryVariant"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"

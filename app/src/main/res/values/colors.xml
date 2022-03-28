@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="black70">#B2000000</color>
+    <color name="black80">#66000000</color>
     <color name="grey">#858585</color>
     <color name="bluePastel">#A7C7E7</color>
     <color name="bluePastel80">#CCA7C7E7</color>
-    <color name="yellowPastel">#FFF44F</color>
-    <color name="yellowPastel80">#CCFFF44F</color>
+    <color name="redPastel">#DA386F</color>
+    <color name="redPastel80">#CCDA386F</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

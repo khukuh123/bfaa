@@ -4,10 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class BFAAPagerAdapter(
+class BasePagerAdapter(
     activity: FragmentActivity,
     private val items: List<Fragment> = listOf(),
-    private val titles: List<String> = listOf()
+    private val titles: List<String> = listOf(),
 ) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int =
         items.size

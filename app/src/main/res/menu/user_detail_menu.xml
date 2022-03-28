@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_favorite"
+        android:checkable="true"
+        android:icon="@drawable/selector_favorite"
+        android:title="@string/menu_favorite"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_baseline_share_24"
         android:title="@string/menu_share"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

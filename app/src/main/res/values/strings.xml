@@ -19,4 +19,11 @@
     <string name="desc_follower_empty">Pengguna ini tidak memiliki pengikut sama sekali</string>
     <string name="desc_following_empty">Pengguna ini belum mengikuti siapapun</string>
     <string name="share_title_user">Bagikan pengguna ini menggunakan…</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="desc_favorite_page">Favorite Page</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="empty_favorite">Kamu belum menambahkan user favorit.\nYuk tambahkan!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="preference_dark_mode">Dark Mode</string>
+    <string name="title_settings">Pengaturan</string>
 </resources>

@@ -14,6 +14,12 @@
         android:theme="@style/Theme.BFAA"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".presentation.github.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.github.FavoriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.github.UserDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.BFAA.NoActionBar" />

@@ -13,5 +13,6 @@ data class User(
     val location: String,
     val name: String,
     val repository: Int,
-    val username: String
+    val username: String,
+    var isFavorite: Boolean,
 ) : Parcelable
