@@ -23,6 +23,17 @@ class GithubRepository private constructor(
     override suspend fun getUserDetail(username: String): Flow<Resource<User>> =
         api.getUserDetail(username).call { it.toUser() }
 
+
+
+
+
+
+
+
+
+
+
+
     override suspend fun getUserFollowers(username: String): Flow<Resource<List<User>>> =
         api.getUserFollowerList(username).call { it.map { followerItem -> followerItem.toUser() } }
 
